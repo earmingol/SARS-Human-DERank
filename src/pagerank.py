@@ -1,4 +1,5 @@
 import networkx as nx
+import numpy as np
 
 from joblib import delayed
 from src.parallelization import ProgressParallel
@@ -23,13 +24,18 @@ def compute_perturbed_pagerank(G, node, *args):
 
 
 def run_perturbed_pagerank(G, nodes=None, n_jobs=1, *args):
-    perturbed_page_rank = dict()
     if nodes is None:
-        nodes = set(G)
+        nodes = list(set(G))
     else:
-        nodes = set(nodes)
+        nodes = list(set(nodes))
 
     result = ProgressParallel(n_jobs=n_jobs, total=len(nodes))(delayed(compute_perturbed_pagerank)(G, n, *args) for n in nodes)
-    for i, n in enumerate(nodes):
-        perturbed_page_rank[n] = result[i]
+    perturbed_page_rank = dict(zip(nodes, result))
     return perturbed_page_rank
+
+
+def div_pagerank(perturbed, normal):
+    if normal == 0.:
+        return np.nan
+    else:
+        return(perturbed/normal)
