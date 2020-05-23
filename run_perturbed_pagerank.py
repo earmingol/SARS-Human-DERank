@@ -8,12 +8,12 @@ parser = argparse.ArgumentParser(description='Compute perturbed pagerank for vir
 parser.add_argument('-t', dest="threads", default=1, type=int, help='Number of threads. By default, it uses 1.')
 parser.add_argument('--output', dest='output', type=str, help='Complete path for output file')
 parser.add_argument('--virus', dest='virus', type=str, help='Complete path for CX file containing virus-human PPI network')
-parser.add_argument('--human', dest='human', type=str, help='Complete path for CX file containing virus-human PPI network')
+parser.add_argument('--human', dest='human', type=str, help='Complete path for CX file containing human PPI network')
 args = parser.parse_args()
 
 # Setup
 threads = args.threads
-output = args.output + '/'
+output = args.output
 virus = args.virus
 human = args.human
 
