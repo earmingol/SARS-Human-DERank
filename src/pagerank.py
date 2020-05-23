@@ -4,15 +4,15 @@ import numpy as np
 from joblib import delayed
 from src.parallelization import ProgressParallel
 
-def pagerank(G, algorithm='default', *args):
+def pagerank(G, algorithm='default', **kwargs):
     if algorithm == 'default':
-        return nx.algorithms.link_analysis.pagerank(G, *args)
+        return nx.algorithms.link_analysis.pagerank(G, **kwargs)
     elif algorithm == 'numpy':
-        return nx.algorithms.link_analysis.pagerank_numpy(G, *args)
+        return nx.algorithms.link_analysis.pagerank_numpy(G, **kwargs)
     elif algorithm == 'google_matrix':
-        return nx.algorithms.link_analysis.google_matrix(G, *args)
+        return nx.algorithms.link_analysis.google_matrix(G, **kwargs)
     elif algorithm == 'scipy':
-        return nx.algorithms.link_analysis.pagerank_scipy(G, *args)
+        return nx.algorithms.link_analysis.pagerank_scipy(G, **kwargs)
     else:
         raise ValueError('Not a correct algorithm')
 
@@ -23,13 +23,13 @@ def compute_perturbed_pagerank(G, node, *args):
     return pagerank(H, *args)
 
 
-def run_perturbed_pagerank(G, nodes=None, n_jobs=1, *args):
+def run_perturbed_pagerank(G, nodes=None, n_jobs=1, **kwargs):
     if nodes is None:
         nodes = list(set(G))
     else:
         nodes = list(set(nodes))
 
-    result = ProgressParallel(n_jobs=n_jobs, total=len(nodes))(delayed(compute_perturbed_pagerank)(G, n, *args) for n in nodes)
+    result = ProgressParallel(n_jobs=n_jobs, total=len(nodes))(delayed(compute_perturbed_pagerank)(G, n, **kwargs) for n in nodes)
     perturbed_page_rank = dict(zip(nodes, result))
     return perturbed_page_rank
 
