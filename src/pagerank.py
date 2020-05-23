@@ -39,3 +39,15 @@ def div_pagerank(perturbed, normal):
         return np.nan
     else:
         return(perturbed/normal)
+
+
+def calculate_alpha(network, m=-0.02935302, b=0.74842057):
+    '''Taken from
+    https://github.com/idekerlab/Network_Evaluation_Tools/blob/master/network_evaluation_tools/network_propagation.py'''
+    log_edge_count = np.log10(len(network.edges()))
+    alpha_val = round(m*log_edge_count+b,3)
+    if alpha_val <=0:
+        raise ValueError('Alpha <= 0 - Network Edge Count is too high')
+        # There should never be a case where Alpha >= 1, as avg node degree will never be negative
+    else:
+        return alpha_val

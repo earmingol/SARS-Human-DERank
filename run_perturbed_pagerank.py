@@ -30,16 +30,25 @@ if __name__ == "__main__":
     # Merge networks
     virus_human = nx.compose(humannet, virusnet)
 
+    # Optimal alpha
+    try:
+        alpha = src.pagerank.calculate_alpha(virus_human)
+    except:
+        alpha = 0.85  # Default value from networkx
+    print('Alpha value: {}'.format(alpha))
+
     # Run Perturbed PageRank
     sars_prots = src.SARS_PROTS
 
     print('Running Basal PageRank (without perturbation)')
-    base_pagerank= nx.algorithms.link_analysis.pagerank(virus_human)
+    base_pagerank= nx.algorithms.link_analysis.pagerank(virus_human,
+                                                        alpha=alpha)
 
     print('Running Perturbed PageRank')
     perturbed_pagerank = src.pagerank.run_perturbed_pagerank(G=virus_human,
                                                              nodes=set(virus_human.nodes) - set(sars_prots),
-                                                             n_jobs=threads
+                                                             n_jobs=threads,
+                                                             alpha=alpha,
                                                              )
 
     perturbed_pagerank['Base-PageRank'] = base_pagerank
