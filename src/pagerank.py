@@ -17,10 +17,10 @@ def pagerank(G, algorithm='default', **kwargs):
         raise ValueError('Not a correct algorithm')
 
 
-def compute_perturbed_pagerank(G, node, *args):
+def compute_perturbed_pagerank(G, node, **kwargs):
     H = G.copy()
     H.remove_node(node)
-    return pagerank(H, *args)
+    return pagerank(H, **kwargs)
 
 
 def run_perturbed_pagerank(G, nodes=None, n_jobs=1, **kwargs):
