@@ -37,24 +37,27 @@ if __name__ == "__main__":
     vals = [v for v in perso.values()]
     median = np.nanmedian(vals)
 
-    remaining_prots = set(virus_human.nodes) - set(perso.keys())
-    for p in remaining_prots:
-        perso[p] = median
+    node_perso = dict()
+    for n in virus_human.nodes:
+        if n in perso.keys():
+            node_perso[n] = perso[n]
+        else:
+            node_perso[n] = median
 
     # Run Perturbed PageRank
     sars_prots = src.SARS_PROTS
 
     print('Running Basal PageRank (without perturbation)')
     base_pagerank= nx.algorithms.link_analysis.pagerank(virus_human,
-                                                        nstart=perso,
-                                                        personalization=perso)
+                                                        nstart=node_perso,
+                                                        personalization=node_perso)
 
     print('Running Perturbed PageRank')
     perturbed_pagerank = src.pagerank.run_perturbed_pagerank(G=virus_human,
                                                              nodes=set(virus_human.nodes) - set(sars_prots),
                                                              n_jobs=threads,
-                                                             nstart=perso,
-                                                             personalization=perso
+                                                             nstart=node_perso,
+                                                             personalization=node_perso
                                                              )
 
     perturbed_pagerank['Base-PageRank'] = base_pagerank
