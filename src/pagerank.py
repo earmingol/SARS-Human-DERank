@@ -4,7 +4,7 @@ import numpy as np
 from joblib import delayed
 from src.parallelization import ProgressParallel
 
-def pagerank(G, algorithm='default', **kwargs):
+def pagerank(G, algorithm='scipy', **kwargs):
     if algorithm == 'default':
         return nx.algorithms.link_analysis.pagerank(G, **kwargs)
     elif algorithm == 'numpy':
@@ -20,6 +20,14 @@ def pagerank(G, algorithm='default', **kwargs):
 def compute_perturbed_pagerank(G, node, **kwargs):
     H = G.copy()
     H.remove_node(node)
+    if 'personalization' in kwargs.key():
+        tmp_dict = kwargs['personalization'].copy()
+        del tmp_dict[node]
+        kwargs['personalization'] = tmp_dict
+    if 'nstart' in kwargs.key():
+        tmp_dict = kwargs['nstart'].copy()
+        del tmp_dict[node]
+        kwargs['nstart'] = tmp_dict
     return pagerank(H, **kwargs)
 
 
