@@ -12,6 +12,8 @@ the perturbation on the PageRank values for each of the viral proteins.
 
 ## Installation
 
+First, clone/download this repo and go into its directory. Then:
+
 * Generate a anaconda environment:
 
 ```
