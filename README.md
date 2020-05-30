@@ -55,15 +55,20 @@ python run_perturbed_pagerank.py -t 8 --output ./PPR-Proteomics-results.pkl --vi
 ```
 
 ### For extracting Base-PageRank results (i.e. PageRank values for each node, without perturbing the network -*removing any node*-)
+
 * Using any output from the previous analyses, run:
 
 ```
 python extract_base_pagerank.py --result ./PPR-results.pkl
 ```
 
+A file PRR-results_Base_PageRank.pkl will be generated.
+
 ### For extracting Perturbed-PageRank results (i.e. fold changes for the base PageRank values of each viral protein after removing each of the other nodes in the network)
+
 * Using any output from the previous analyses, run:
 
 ```
 python pagerank_results_to_dataframe.py --result ./PPR-results.pkl
 ```
+A file PRR-results.csv will be generated.
