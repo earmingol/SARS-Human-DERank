@@ -47,7 +47,7 @@ python run_perturbed_pagerank.py -t 8 --output ./PPR-results.pkl --virus ./input
 python run_perturbed_pagerank.py -t 8 --output ./PPR-Transcriptomics-results.pkl --virus ./inputs/SARS-CoV-2-Host-Pathogen-Interaction.cx --human ./inputs/BioPlex2.0.cx --de ./inputs/Transcriptomics-Personalization.pkl
 ```
 
- * Integrating **proteomics data** (see how the file Transcriptomics-Personalization.pkl was generate
+ * Integrating **proteomics data** (see how the file Proteomics-Personalization.pkl was generate
  in the jupyter notebook [Differential-Expression](./Differential-Expression.ipynb)) and using 8 cores
  
 ```
