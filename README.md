@@ -21,7 +21,7 @@ conda create -n pagerank -y python=3.7 jupyter
 * Activate the environment:
 
 ```
-conda activate
+conda activate pagerank
 ```
 
 * Install dependencies:
