@@ -64,7 +64,7 @@ python extract_base_pagerank.py --result ./PPR-results.pkl
 
 A file PRR-results_Base_PageRank.pkl will be generated.
 
-### For extracting Perturbed-PageRank results (i.e. fold changes for the base PageRank values of each viral protein after removing each of the other nodes in the network)
+### For extracting Perturbed-PageRank results (i.e. fold changes for the base PageRank values of each viral protein after removing each of the other nodes in the network)
 
 * Using any output from the previous analyses, run:
 
