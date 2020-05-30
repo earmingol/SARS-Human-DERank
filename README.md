@@ -9,3 +9,36 @@ Search of important genes for viral infection given a
 
 This search is based on deleting each of the genes in the human interaction network and observing
 the perturbation on the PageRank values for each of the viral proteins.
+
+### For running the analysis without omics data
+ **For example, run the analysis using 8 cores:**
+```
+python run_perturbed_pagerank.py -t 8 --output ./PPR-results.pkl --virus ./inputs/SARS-CoV-2-Host-Pathogen-Interaction.cx --human ./inputs/BioPlex2.0.cx
+```
+ 
+ ### For running the analysis with omics data
+ **Integrating transcriptomics data (see how the file Transcriptomics-Personalization.pkl was generate
+ in the jupyter notebook [Differential-Expression](./Differential-Expression.ipynb)) and using 8 cores**
+ 
+```
+python run_perturbed_pagerank.py -t 8 --output ./PPR-Transcriptomics-results.pkl --virus ./inputs/SARS-CoV-2-Host-Pathogen-Interaction.cx --human ./inputs/BioPlex2.0.cx --de ./inputs/Transcriptomics-Personalization.pkl
+```
+
+ **Integrating proteomics data (see how the file Transcriptomics-Personalization.pkl was generate
+ in the jupyter notebook [Differential-Expression](./Differential-Expression.ipynb)) and using 8 cores**
+ 
+```
+python run_perturbed_pagerank.py -t 8 --output ./PPR-Proteomics-results.pkl --virus ./inputs/SARS-CoV-2-Host-Pathogen-Interaction.cx --human ./inputs/BioPlex2.0.cx --de ./inputs/Proteomics-Personalization.pkl
+```
+
+### For extracting Base-PageRank results (i.e. PageRank values for each node, without perturbing the network -removing any node-)
+**Using any output from the previous analyses, run:**
+
+```
+python extract_base_pagerank.py --result ./PPR-results.pkl
+```
+
+### For extracting Perturbed-PageRank results (i.e. fold changes for the base PageRank values of each viral protein after removing each of the other nodes in the network)
+```
+python pagerank_results_to_dataframe.py --result ./PPR-results.pkl
+```

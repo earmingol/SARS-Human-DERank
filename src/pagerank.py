@@ -20,14 +20,16 @@ def pagerank(G, algorithm='scipy', **kwargs):
 def compute_perturbed_pagerank(G, node, **kwargs):
     H = G.copy()
     H.remove_node(node)
-    if 'personalization' in kwargs.key():
-        tmp_dict = kwargs['personalization'].copy()
-        del tmp_dict[node]
-        kwargs['personalization'] = tmp_dict
-    if 'nstart' in kwargs.key():
-        tmp_dict = kwargs['nstart'].copy()
-        del tmp_dict[node]
-        kwargs['nstart'] = tmp_dict
+    if 'personalization' in kwargs.keys():
+        if kwargs['personalization'] is not None:
+            tmp_dict = kwargs['personalization'].copy()
+            del tmp_dict[node]
+            kwargs['personalization'] = tmp_dict
+    if 'nstart' in kwargs.keys():
+        if kwargs['nstart'] is not None:
+            tmp_dict = kwargs['nstart'].copy()
+            del tmp_dict[node]
+            kwargs['nstart'] = tmp_dict
     return pagerank(H, **kwargs)
 
 
