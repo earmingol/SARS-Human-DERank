@@ -24,4 +24,15 @@ SARS_PROTS = ['E',
               'Orf7a',
               'Orf8',
               'Orf9b',
-              'Orf9c',]
+              'Orf9c']
+
+FLU_PROTS = ['HA',
+             'M1',
+             'M2',
+             'NA',
+             'NP',
+             'NS1',
+             'NS2',
+             'PA',
+             'PB1',
+             'PB2']
