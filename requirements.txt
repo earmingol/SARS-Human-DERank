@@ -1,4 +1,4 @@
-numpy==1.18.2
+numpy==1.22.0
 ndex2==3.3.1
 pandas==1.0.3
 tqdm==4.45.0
